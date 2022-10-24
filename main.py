@@ -55,10 +55,10 @@ def AI() -> None:
             num = 4
             center.append(target)
     else:
-        target = last_move
-        if last_move not in center:
+        target = last_move if last_move in board else next(iter(board))
+        if target not in center:
             for j in range(9):
-                temp = board[last_move].copy()
+                temp = board[target].copy()
                 temp[j] = 'X'
                 if kill_board(temp):
                     num = j
@@ -82,9 +82,9 @@ def AI() -> None:
                         num = j
                         break
         else:
-            if len(board)>1:
+            if len(board)==3:
                 for j in range(9):
-                    temp = board[last_move].copy()
+                    temp = board[target].copy()
                     temp[j] = 'X'
                     if kill_board(temp):
                         num = j
@@ -94,16 +94,16 @@ def AI() -> None:
                 count = 0
                 last_digit = -1
                 for i in range(9):
-                    if board[last_move][i]=='X':
+                    if board[target][i]=='X':
                         count+=1
                         last_digit = i if i!=4 else last_digit
                 if count==2:
                     num = moves[last_digit]
                 else:
                     for j in range(9):
-                        if board[last_move][j]=='X':
+                        if board[target][j]=='X':
                             continue
-                        temp = board[last_move].copy()
+                        temp = board[target].copy()
                         temp[j] = 'X'
                         if not kill_board(temp):
                             num = j
