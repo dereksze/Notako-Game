@@ -146,5 +146,4 @@ def main():
         if len(board)==0:
             print('AI win the game')
             break
-        print(center)
 main()
